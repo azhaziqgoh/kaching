@@ -81,6 +81,8 @@ class BarChart {
 
         let data = this._config.data;
 
+        let colorScale = d3.scaleOrdinal(d3.schemeCategory10);
+
         //Set x and y scale domain base on data
         this._scale.x.domain(data.map((d:any) => { return d.x }));
         this._scale.y.domain([0,d3.max(data,(d:any) => { return d.y })]);
@@ -98,6 +100,35 @@ class BarChart {
             .attr("y", (d:any) => { return this._scale.y(d.y);})
             .attr("width", (d:any) => { return this._scale.x.bandwidth() })
             .attr("height", (d:any) => { return this._inner.height - this._scale.y(d.y)})
+            .attr("fill", function (d){ return colorScale(d.x); })
+            .on("mouseover", function() { tooltip.style("display", null); })
+            .on("mouseout", function() { tooltip.style("display", "none"); })
+            .on("mousemove", function(d) {
+                
+                let xPosition = d3.mouse(this)[0] + 80;
+                let yPosition = d3.mouse(this)[1] + 80;
+
+                tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
+                tooltip.select("text").text(d.y);
+            });
+        
+        var tooltip = this._svg.append("g")
+            .attr("class","tooltipD3")
+            .style("display","none")
+        
+        tooltip.append("rect")
+            .attr("width", 30)
+            .attr("height", 20)
+            .attr("fill", "white")
+            .style("opacity", 0.5);
+          
+        tooltip.append("text")
+            .attr("x", 15)
+            .attr("dy", "1.2em")
+            .style("text-anchor", "middle")
+            .attr("font-size", "12px")
+            .attr("font-weight", "bold")
+            .attr("fill","black");
     }
 }
 
