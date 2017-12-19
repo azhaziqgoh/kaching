@@ -54,6 +54,7 @@ export class LedgerTableComponent implements OnInit {
 
     addLedgerEntry(){
         this.currentActiveIndex = -1;
+           
         this.addData.emit(this.newLedgerEntryForm.value);
         this.resetLedgerEntry('new');
     }

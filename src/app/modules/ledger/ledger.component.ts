@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Ledger } from './ledger';
 import { LedgerService } from './ledger.service';
+import { parse } from 'querystring';
 
 @Component({
     selector: 'ledger',
@@ -48,8 +49,20 @@ export class LedgerComponent implements OnInit {
         this.ledgerService.getLedgerEntries().subscribe(le => this.ledgerEntries = le);
     }
 
-    addLedgerEntries(le:Ledger):void {
-        console.log(le);
+    addLedgerEntries(le:any):void {
+        
+        if(le.credit == ''){
+            le.credit = 0;
+        } else {
+            le.credit = parseInt(le.credit);
+        }
+
+        if(le.debit == ''){
+            le.debit = 0;
+        } else {
+            le.debit = parseInt(le.debit);
+        }
+        
         this.ledgerService.addLedgerEntry(le).subscribe(res => this.getLedgerEntries());
     }
 
