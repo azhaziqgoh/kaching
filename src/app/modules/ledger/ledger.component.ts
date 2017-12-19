@@ -66,7 +66,20 @@ export class LedgerComponent implements OnInit {
         this.ledgerService.addLedgerEntry(le).subscribe(res => this.getLedgerEntries());
     }
 
-    updateLedgerEntries(le:Ledger):void {
+    updateLedgerEntries(le:any):void {
+
+        if(le.credit == ''){
+            le.credit = 0;
+        } else {
+            le.credit = parseInt(le.credit);
+        }
+
+        if(le.debit == ''){
+            le.debit = 0;
+        } else {
+            le.debit = parseInt(le.debit);
+        }
+        
         this.ledgerService.updateLedgerEntry(le).subscribe(res => this.getLedgerEntries());
     }
 

@@ -68,6 +68,7 @@
                     <form [formGroup]="editLedgerEntryForm" novalidate *ngIf="i == currentActiveIndex">
                         <div class="form-group">
                             <input class="form-control"type="date" placeholder="Enter Date" formControlName="date">
+                            <span class="form-error" *ngIf="editLedgerEntryForm.get('date').hasError('required') && editLedgerEntryForm.get('date').touched">This is required</span>
                         </div>
                     </form>
                     <span *ngIf="i != currentActiveIndex">
@@ -78,6 +79,7 @@
                     <form [formGroup]="editLedgerEntryForm" novalidate *ngIf="i == currentActiveIndex">
                         <div class="form-group">
                             <input class="form-control" type="text" placeholder="Enter Description" formControlName="description">
+                            <span class="form-error" *ngIf="editLedgerEntryForm.get('description').hasError('required') && editLedgerEntryForm.get('description').touched">This is required</span>
                         </div>
                     </form>
                     <span *ngIf="i != currentActiveIndex">
@@ -94,6 +96,7 @@
                             <option>Entertainment</option>
                             <option>Others</option>
                         </select>
+                        <span class="form-error" *ngIf="editLedgerEntryForm.get('category').hasError('required') && editLedgerEntryForm.get('category').touched">This is required</span>
                     </form>
                     <span *ngIf="i != currentActiveIndex">
                         {{ le.category }}
@@ -102,7 +105,9 @@
                 <td>
                     <form [formGroup]="editLedgerEntryForm" novalidate *ngIf="i == currentActiveIndex">
                         <div class="form-group">
-                            <input class="form-control" type="text" placeholder="Enter Debit Value" formControlName="debit">
+                            <input class="form-control" type="text" placeholder="Enter Debit Value" formControlName="debit" [readOnly]="editLedgerEntryForm.get('credit').value.length > 0">
+                            <span class="form-error" *ngIf="editLedgerEntryForm.get('debit').invalid && editLedgerEntryForm.get('debit').touched">This must be a number</span>
+                            <span class="form-info" *ngIf="editLedgerEntryForm.get('credit').value.length > 0">Either debit or credit. Not both</span>
                         </div>
                     </form>
                     <span *ngIf="i != currentActiveIndex">
@@ -111,7 +116,9 @@
                 </td>
                 <td>
                     <form [formGroup]="editLedgerEntryForm" novalidate *ngIf="i == currentActiveIndex">
-                        <input class="form-control" type="text" placeholder="Enter Credit Value" formControlName="credit">
+                        <input class="form-control" type="text" placeholder="Enter Credit Value" formControlName="credit" [readOnly]="editLedgerEntryForm.get('debit').value.length > 0">
+                        <span class="form-error" *ngIf="editLedgerEntryForm.get('credit').invalid && editLedgerEntryForm.get('credit').touched">This must be a number</span>
+                        <span class="form-info" *ngIf="editLedgerEntryForm.get('debit').value.length > 0">Either debit or credit. Not both</span>
                     </form>
                     <span *ngIf="i != currentActiveIndex">
                         {{ le.credit }}
@@ -121,7 +128,7 @@
                     <span class="action" (click)="editLedgerEntry(le,i)" *ngIf="i != currentActiveIndex">
                         <i class="fa fa-pencil-square"></i>
                     </span>
-                    <span class="action" (click)="updateLedgerEntry()" *ngIf="i == currentActiveIndex">
+                    <span class="action" (click)="editLedgerEntryForm.valid && updateLedgerEntry()" *ngIf="i == currentActiveIndex" [ngClass]="{ 'block': editLedgerEntryForm.invalid }">
                         <i class="fa fa-floppy-o"></i>
                     </span>
                     <span class="action" (click)="deleteLedgerEntry(le)" *ngIf="i != currentActiveIndex">

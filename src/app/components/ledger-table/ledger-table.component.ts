@@ -42,11 +42,11 @@ export class LedgerTableComponent implements OnInit {
         
         this.editLedgerEntryForm = this.fb.group({
             id: '',
-            date: '',
-            description: '',
-            category: '',
-            debit: '',
-            credit: ''
+            date: ['', Validators.required ],
+            description: ['', Validators.required ],
+            category: ['', Validators.required ],
+            debit: ['', Validators.pattern(/^[0-9]*$/) ],
+            credit: ['', Validators.pattern(/^[0-9]*$/) ]
         });
     }
 
@@ -71,8 +71,8 @@ export class LedgerTableComponent implements OnInit {
             date: le.date,
             description: le.description,
             category: le.category,
-            debit: le.debit,
-            credit: le.credit
+            debit: le.debit == 0 ? '' : le.debit.toString(),
+            credit: le.credit == 0 ? '' : le.credit.toString()
         });
     }
 
