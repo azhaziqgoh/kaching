@@ -1,0 +1,9 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="navbar-collapse" id="navbarToggler">
+        <a class="navbar-brand">$Ka-Ching</a>
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" routerLink="/ledger" [ngClass]="{ 'active': 'ledger' == currentRoute }">Ledger</a>
+            <a class="nav-item nav-link" routerLink="/dashboard" [ngClass]="{ 'active': 'dashboard' == currentRoute }">Dashboard</a>
+        </div>
+    </div>
+</nav>

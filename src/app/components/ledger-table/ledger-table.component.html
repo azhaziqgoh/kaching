@@ -1,0 +1,83 @@
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Debit (RM)</th>
+                <th>Credit (RM)</th>
+                <th>Balance (RM)</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <form [formGroup]="newLedgerEntryForm" novalidate>
+                        <div class="form-group">
+                            <input class="form-control"type="date" placeholder="Enter Date" formControlName="date">
+                        </div>
+                    </form>
+                </td>
+                <td>
+                    <form [formGroup]="newLedgerEntryForm" novalidate>
+                        <div class="form-group">
+                            <input class="form-control" type="text" placeholder="Enter Description" formControlName="description">
+                        </div>
+                    </form>
+                </td>
+                <td>
+                    <form [formGroup]="newLedgerEntryForm" novalidate>
+                        <select class="form-control" formControlName="category">
+                            <option>Food</option>
+                            <option>Income</option>
+                            <option>Transportation</option>
+                            <option>Bills</option>
+                            <option>Entertainment</option>
+                            <option>Others</option>
+                        </select>
+                    </form>
+                </td>
+                <td>
+                    <form [formGroup]="newLedgerEntryForm" novalidate>
+                        <div class="form-group">
+                            <input class="form-control" type="text" placeholder="Enter Debit Value" formControlName="debit">
+                        </div>
+                    </form>
+                </td>
+                <td>
+                    <form [formGroup]="newLedgerEntryForm" novalidate>
+                        <input class="form-control" type="text" placeholder="Enter Credit Value" formControlName="credit">
+                    </form>
+                </td>
+                <td>
+                    <form [formGroup]="newLedgerEntryForm" novalidate>
+                        <input class="form-control" type="text" placeholder="Balance" formControlName="balance" readonly>
+                    </form>
+                </td>
+                <td>
+                    <span class="action" (click)="addLedgerEntry()">
+                        <i class="fa fa-plus-circle"></i>
+                    </span>
+                </td>
+            </tr>
+            <tr *ngFor="let le of ledgerEntries">
+                <td>{{ le.date }}</td>
+                <td>{{ le.description }}</td>
+                <td>{{ le.category }}</td>
+                <td>{{ le.debit }}</td>
+                <td>{{ le.credit }}</td>
+                <td>{{ le.balance }}</td>
+                <td>
+                    <span class="action" (click)="editLedgerEntry(le)">
+                        <i class="fa fa-pencil-square"></i>
+                    </span>
+                    <span class="action" (click)="deleteLedgerEntry(le)">
+                        <i class="fa fa-trash"></i>
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
