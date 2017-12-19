@@ -7,7 +7,6 @@
                 <th>Category</th>
                 <th>Debit (RM)</th>
                 <th>Credit (RM)</th>
-                <th>Balance (RM)</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -49,11 +48,6 @@
                 <td>
                     <form [formGroup]="newLedgerEntryForm" novalidate>
                         <input class="form-control" type="text" placeholder="Enter Credit Value" formControlName="credit">
-                    </form>
-                </td>
-                <td>
-                    <form [formGroup]="newLedgerEntryForm" novalidate>
-                        <input class="form-control" type="text" placeholder="Balance" formControlName="balance" readonly>
                     </form>
                 </td>
                 <td>
@@ -114,14 +108,6 @@
                     </form>
                     <span *ngIf="i != currentActiveIndex">
                         {{ le.credit }}
-                    </span>
-                </td>
-                <td>
-                    <form [formGroup]="editLedgerEntryForm" novalidate *ngIf="i == currentActiveIndex">
-                        <input class="form-control" type="text" placeholder="Balance" formControlName="balance" readonly>
-                    </form>
-                    <span *ngIf="i != currentActiveIndex">
-                        {{ le.balance }}
                     </span>
                 </td>
                 <td>

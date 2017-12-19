@@ -6,7 +6,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col">
+            <div class="col balance-info cards">
+                <h2>Financial Balance (RM): Debit  - Credit = <span [ngClass]="{ 'green': currentBalance > 0,'red': currentBalance < 0 }">{{ currentBalance || 0 }}</span></h2>
+            </div>
+            <div class="col cards">
                 <bar-chart [chartConfig]="debitCreditChartConfig" [chartData]="debitCreditChartData" *ngIf="debitCreditChartData.length > 0"></bar-chart>
             </div>
         </div>

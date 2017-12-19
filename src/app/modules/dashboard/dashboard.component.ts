@@ -13,6 +13,7 @@ export class DashboardComponent implements OnInit {
     today: string;
     debitCreditChartData: any;
     debitCreditChartConfig: any;
+    currentBalance: number;
 
     constructor(private ds: DashboardService){
         ds.getLedgerEntries().subscribe(res => this.initDebitCreditChart(res));
@@ -48,7 +49,7 @@ export class DashboardComponent implements OnInit {
 
     initDebitCreditChart(data:Ledger[]){
         this.debitCreditChartConfig = {
-            title: 'Debit vs Credit'
+            title: 'Debit vs Credit Chart'
         }
 
         this.massageData(data);
@@ -83,5 +84,6 @@ export class DashboardComponent implements OnInit {
         debitCreditChartDataTemp.push(debitData);
         debitCreditChartDataTemp.push(creditData);
         this.debitCreditChartData = debitCreditChartDataTemp;
+        this.currentBalance = debitData.y - creditData.y;
     }
 }

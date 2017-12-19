@@ -1,3 +1,25 @@
 .title, .section {
     margin: 15px 0px;
 }
+
+.balance-info {
+    text-align: center;
+
+    h2 {
+        & > span {
+
+            &.green {
+                color: rgb(16, 190, 16);
+            }
+
+            &.red {
+                color: red;
+            }
+        }
+    }
+}
+
+.cards {
+    margin: 15px 15px;
+    box-shadow: 3px 3px 6px #969696;
+}

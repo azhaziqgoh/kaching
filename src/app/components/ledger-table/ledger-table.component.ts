@@ -37,8 +37,7 @@ export class LedgerTableComponent implements OnInit {
             description: '',
             category: '',
             debit: '',
-            credit: '',
-            balance: '',
+            credit: ''
         });
         
         this.editLedgerEntryForm = this.fb.group({
@@ -47,8 +46,7 @@ export class LedgerTableComponent implements OnInit {
             description: '',
             category: '',
             debit: '',
-            credit: '',
-            balance: ''
+            credit: ''
         });
     }
 
@@ -74,8 +72,7 @@ export class LedgerTableComponent implements OnInit {
             description: le.description,
             category: le.category,
             debit: le.debit,
-            credit: le.credit,
-            balance: le.balance || 0
+            credit: le.credit
         });
     }
 
@@ -95,8 +92,7 @@ export class LedgerTableComponent implements OnInit {
                     description: '',
                     category: '',
                     debit: '',
-                    credit: '',
-                    balance: '',
+                    credit: ''
                 });
             case 'edit':
                 this.editLedgerEntryForm.reset({
@@ -104,8 +100,7 @@ export class LedgerTableComponent implements OnInit {
                     description: '',
                     category: '',
                     debit: '',
-                    credit: '',
-                    balance: '',
+                    credit: ''
                 });
         }
     }

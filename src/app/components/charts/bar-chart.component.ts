@@ -34,8 +34,8 @@ export class BarChartComponent implements OnInit {
         let config = {
             element: this.elementRef.nativeElement.querySelector('.chart-body'),
             svg: {
-                width: window.innerWidth - 1,
-                height: 500,
+                width: window.innerWidth - 60,
+                height: window.innerHeight / 2,
                 margin: {
                     left: 100,
                     top: 100,
