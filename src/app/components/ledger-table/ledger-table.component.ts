@@ -19,52 +19,71 @@ export class LedgerTableComponent implements OnInit {
     @Output() deleteData = new EventEmitter<Ledger>();
 
     newLedgerEntryForm: FormGroup
-
     editLedgerEntryForm: FormGroup
 
+    currentActiveIndex: number
+
     constructor(private fb: FormBuilder){
-        this.createLedgerEntryForm('new');
+        this.createLedgerEntryForm();
+        this.currentActiveIndex = -1;
     }
 
     ngOnInit(){}
 
-    createLedgerEntryForm(type:string){
+    createLedgerEntryForm(){
 
-        switch (type){
-            case 'new':
-                this.newLedgerEntryForm = this.fb.group({
-                    date: '',
-                    description: '',
-                    category: '',
-                    debit: '',
-                    credit: '',
-                    balance: '',
-                });
-            case 'edit':
-                this.editLedgerEntryForm = this.fb.group({
-                    date: '',
-                    description: '',
-                    category: '',
-                    debit: '',
-                    credit: '',
-                    balance: ''
-                });
-        }
+        this.newLedgerEntryForm = this.fb.group({
+            date: '',
+            description: '',
+            category: '',
+            debit: '',
+            credit: '',
+            balance: '',
+        });
+        
+        this.editLedgerEntryForm = this.fb.group({
+            id: '',
+            date: '',
+            description: '',
+            category: '',
+            debit: '',
+            credit: '',
+            balance: ''
+        });
     }
 
     addLedgerEntry(){
+        this.currentActiveIndex = -1;
         this.addData.emit(this.newLedgerEntryForm.value);
-        this.resetLedgerEntry('new')
+        this.resetLedgerEntry('new');
     }
 
-    updateLedgerEntry(){}
+    updateLedgerEntry(){
+        this.currentActiveIndex = -1;
+        this.updateData.emit(this.editLedgerEntryForm.value);
+        this.resetLedgerEntry('edit');
+    }
 
-    editLedgerEntry(le:Ledger){
+    editLedgerEntry(le:Ledger,idx:number){
+        this.currentActiveIndex = idx;
 
+        this.editLedgerEntryForm.setValue({
+            id: le.id,
+            date: le.date,
+            description: le.description,
+            category: le.category,
+            debit: le.debit,
+            credit: le.credit,
+            balance: le.balance || 0
+        });
     }
 
     deleteLedgerEntry(le:Ledger){
         this.deleteData.emit(le);
+    }
+
+    cancelLedgerEntry(){
+        this.currentActiveIndex = -1;
     }
 
     resetLedgerEntry(type:string){

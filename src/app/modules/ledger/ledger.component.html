@@ -10,7 +10,11 @@
     </div>
     <div class="row section">
         <div class="col">
-            <ledger-table [ledgerData]="ledgerEntries" (deleteData)="deleteLedgerEntries($event)" (addData)="addLedgerEntries($event)" *ngIf="ledgerEntries.length > 0"></ledger-table>
+            <ledger-table   [ledgerData]="ledgerEntries" 
+                            (deleteData)="deleteLedgerEntries($event)" 
+                            (addData)="addLedgerEntries($event)" 
+                            (updateData)="updateLedgerEntries($event)"
+                            *ngIf="ledgerEntries.length > 0"></ledger-table>
         </div>
     </div>
 </div>

@@ -62,19 +62,80 @@
                     </span>
                 </td>
             </tr>
-            <tr *ngFor="let le of ledgerEntries">
-                <td>{{ le.date }}</td>
-                <td>{{ le.description }}</td>
-                <td>{{ le.category }}</td>
-                <td>{{ le.debit }}</td>
-                <td>{{ le.credit }}</td>
-                <td>{{ le.balance }}</td>
+            <tr *ngFor="let le of ledgerEntries;let i = index">
                 <td>
-                    <span class="action" (click)="editLedgerEntry(le)">
+                    <form [formGroup]="editLedgerEntryForm" novalidate *ngIf="i == currentActiveIndex">
+                        <div class="form-group">
+                            <input class="form-control"type="date" placeholder="Enter Date" formControlName="date">
+                        </div>
+                    </form>
+                    <span *ngIf="i != currentActiveIndex">
+                        {{ le.date }}
+                    </span>
+                </td>
+                <td>
+                    <form [formGroup]="editLedgerEntryForm" novalidate *ngIf="i == currentActiveIndex">
+                        <div class="form-group">
+                            <input class="form-control" type="text" placeholder="Enter Description" formControlName="description">
+                        </div>
+                    </form>
+                    <span *ngIf="i != currentActiveIndex">
+                        {{ le.description }}
+                    </span>
+                </td>
+                <td>
+                    <form [formGroup]="editLedgerEntryForm" novalidate *ngIf="i == currentActiveIndex">
+                        <select class="form-control" formControlName="category">
+                            <option>Food</option>
+                            <option>Income</option>
+                            <option>Transportation</option>
+                            <option>Bills</option>
+                            <option>Entertainment</option>
+                            <option>Others</option>
+                        </select>
+                    </form>
+                    <span *ngIf="i != currentActiveIndex">
+                        {{ le.category }}
+                    </span>
+                </td>
+                <td>
+                    <form [formGroup]="editLedgerEntryForm" novalidate *ngIf="i == currentActiveIndex">
+                        <div class="form-group">
+                            <input class="form-control" type="text" placeholder="Enter Debit Value" formControlName="debit">
+                        </div>
+                    </form>
+                    <span *ngIf="i != currentActiveIndex">
+                        {{ le.debit }}
+                    </span>
+                </td>
+                <td>
+                    <form [formGroup]="editLedgerEntryForm" novalidate *ngIf="i == currentActiveIndex">
+                        <input class="form-control" type="text" placeholder="Enter Credit Value" formControlName="credit">
+                    </form>
+                    <span *ngIf="i != currentActiveIndex">
+                        {{ le.credit }}
+                    </span>
+                </td>
+                <td>
+                    <form [formGroup]="editLedgerEntryForm" novalidate *ngIf="i == currentActiveIndex">
+                        <input class="form-control" type="text" placeholder="Balance" formControlName="balance" readonly>
+                    </form>
+                    <span *ngIf="i != currentActiveIndex">
+                        {{ le.balance }}
+                    </span>
+                </td>
+                <td>
+                    <span class="action" (click)="editLedgerEntry(le,i)" *ngIf="i != currentActiveIndex">
                         <i class="fa fa-pencil-square"></i>
                     </span>
-                    <span class="action" (click)="deleteLedgerEntry(le)">
+                    <span class="action" (click)="updateLedgerEntry()" *ngIf="i == currentActiveIndex">
+                        <i class="fa fa-floppy-o"></i>
+                    </span>
+                    <span class="action" (click)="deleteLedgerEntry(le)" *ngIf="i != currentActiveIndex">
                         <i class="fa fa-trash"></i>
+                    </span>
+                    <span class="action" (click)="cancelLedgerEntry()" *ngIf="i == currentActiveIndex">
+                        <i class="fa fa-ban"></i>
                     </span>
                 </td>
             </tr>
