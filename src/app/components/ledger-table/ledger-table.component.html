@@ -16,6 +16,7 @@
                     <form [formGroup]="newLedgerEntryForm" novalidate>
                         <div class="form-group">
                             <input class="form-control"type="date" placeholder="Enter Date" formControlName="date">
+                            <span class="form-error" *ngIf="newLedgerEntryForm.get('date').hasError('required') && newLedgerEntryForm.get('date').touched">This is required</span>
                         </div>
                     </form>
                 </td>
@@ -23,6 +24,7 @@
                     <form [formGroup]="newLedgerEntryForm" novalidate>
                         <div class="form-group">
                             <input class="form-control" type="text" placeholder="Enter Description" formControlName="description">
+                            <span class="form-error" *ngIf="newLedgerEntryForm.get('description').hasError('required') && newLedgerEntryForm.get('description').touched">This is required</span>
                         </div>
                     </form>
                 </td>
@@ -36,22 +38,27 @@
                             <option>Entertainment</option>
                             <option>Others</option>
                         </select>
+                        <span class="form-error" *ngIf="newLedgerEntryForm.get('category').hasError('required') && newLedgerEntryForm.get('category').touched">This is required</span>
                     </form>
                 </td>
                 <td>
                     <form [formGroup]="newLedgerEntryForm" novalidate>
                         <div class="form-group">
-                            <input class="form-control" type="text" placeholder="Enter Debit Value" formControlName="debit">
+                            <input class="form-control" type="text" placeholder="Enter Debit Value" formControlName="debit" [readOnly]="newLedgerEntryForm.get('credit').value.length > 0">
+                            <span class="form-error" *ngIf="newLedgerEntryForm.get('debit').invalid && newLedgerEntryForm.get('debit').touched">This must be a number</span>
+                            <span class="form-info" *ngIf="newLedgerEntryForm.get('credit').value.length > 0">Either debit or credit. Not both</span>
                         </div>
                     </form>
                 </td>
                 <td>
                     <form [formGroup]="newLedgerEntryForm" novalidate>
-                        <input class="form-control" type="text" placeholder="Enter Credit Value" formControlName="credit">
+                        <input class="form-control" type="text" placeholder="Enter Credit Value" formControlName="credit" [readOnly]="newLedgerEntryForm.get('debit').value.length > 0">
+                        <span class="form-error" *ngIf="newLedgerEntryForm.get('credit').invalid && newLedgerEntryForm.get('credit').touched">This must be a number</span>
+                        <span class="form-info" *ngIf="newLedgerEntryForm.get('debit').value.length > 0">Either debit or credit. Not both</span>
                     </form>
                 </td>
                 <td>
-                    <span class="action" (click)="addLedgerEntry()">
+                    <span class="action" (click)="newLedgerEntryForm.valid && addLedgerEntry()" [ngClass]="{ 'block': newLedgerEntryForm.invalid }">
                         <i class="fa fa-plus-circle"></i>
                     </span>
                 </td>

@@ -1,5 +1,5 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Ledger } from '../../modules/ledger/ledger';
 import { makeDecorator } from '@angular/core/src/util/decorators';
@@ -33,11 +33,11 @@ export class LedgerTableComponent implements OnInit {
     createLedgerEntryForm(){
 
         this.newLedgerEntryForm = this.fb.group({
-            date: '',
-            description: '',
-            category: '',
-            debit: '',
-            credit: ''
+            date: ['', Validators.required ],
+            description: ['', Validators.required ],
+            category: ['', Validators.required ],
+            debit: ['', Validators.pattern(/^[0-9]*$/) ],
+            credit: ['', Validators.pattern(/^[0-9]*$/) ]
         });
         
         this.editLedgerEntryForm = this.fb.group({

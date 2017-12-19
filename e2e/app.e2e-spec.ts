@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('sitecore-techreview-app App', () => {
+describe('kaching App', () => {
   let page: AppPage;
 
   beforeEach(() => {
