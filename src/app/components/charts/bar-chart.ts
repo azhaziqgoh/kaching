@@ -101,12 +101,12 @@ class BarChart {
             .attr("width", (d:any) => { return this._scale.x.bandwidth() })
             .attr("height", (d:any) => { return this._inner.height - this._scale.y(d.y)})
             .attr("fill", function (d){ return colorScale(d.x); })
-            .on("mouseover", function() { tooltip.style("display", null); })
-            .on("mouseout", function() { tooltip.style("display", "none"); })
+            .on("mouseover", function() { tooltip.style("display", null);})
+            .on("mouseout", function() { tooltip.style("display", "none");})
             .on("mousemove", function(d) {
                 
-                let xPosition = d3.mouse(this)[0] + 80;
-                let yPosition = d3.mouse(this)[1] + 80;
+                let xPosition = d3.mouse(this)[0] + 75;
+                let yPosition = d3.mouse(this)[1] + 75;
 
                 tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
                 tooltip.select("text").text(d.y);
@@ -128,7 +128,6 @@ class BarChart {
             .style("text-anchor", "middle")
             .attr("font-size", "12px")
             .attr("font-weight", "bold")
-            .attr("fill","black");
     }
 }
 
